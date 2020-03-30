@@ -1,0 +1,32 @@
+{
+	"name": "FullName",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Input",
+						"type": "DatasetReference"
+					},
+					"name": "Input"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Output",
+						"type": "DatasetReference"
+					},
+					"name": "OutputFile"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FullName"
+				}
+			],
+			"script": "source(output(\n\t\tid as string,\n\t\tfirst_name as string,\n\t\tlast_name as string,\n\t\temail as string,\n\t\tgender as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Input\nInput derive(FullName = concat(first_name, last_name)) ~> FullName\nFullName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> OutputFile"
+		}
+	}
+}
