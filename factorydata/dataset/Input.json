@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "MOCK_DATA.json",
+				"fileName": "1input.json",
 				"container": "input"
 			}
 		},
